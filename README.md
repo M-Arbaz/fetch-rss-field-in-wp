@@ -1,31 +1,32 @@
-# Fetch RSS Field in WordPress
+# WordPress RSS Feed Importer with Image Filter and Auto-Thumbnail
 
-This WordPress snippet/plugin allows you to fetch and display data from an RSS feed directly within your WordPress theme or plugin.
+This script automatically imports posts from multiple RSS feed sources into your WordPress site. It assigns categories, filters entries without images, and sets featured images. It also includes a utility to clean up posts without thumbnails.
 
 ## Features
 
-- Fetch RSS feed from any public URL
-- Parse specific fields (title, link, description, date, etc.)
-- Easy integration into themes or custom plugins
-- Lightweight and fast
+- ✅ Imports latest post from multiple RSS sources
+- ✅ Automatically creates categories if they don't exist
+- ✅ Only imports posts that include an image
+- ✅ Sets the image as the featured thumbnail
+- ✅ Schedules imported posts
+- ✅ Optional cleanup: deletes or updates posts missing a featured image
+
+---
 
 ## Installation
 
-1. Add the function to your `functions.php` file **or** create a custom plugin.
-2. Call the function where you want to display RSS data (e.g., in a template file).
+1. Add the provided code to your theme's `functions.php` file or a custom plugin.
+2. Make sure the following WordPress core files are included for media handling:
+   - `wp-admin/includes/media.php`
+   - `wp-admin/includes/file.php`
+   - `wp-admin/includes/image.php`
+   - `wp-admin/includes/post.php`
+
+---
 
 ## Usage
 
-### Basic Example
+### 🔄 Trigger Feed Import
 
-```php
-<?php
-$rss = fetch_rss_fields('https://example.com/feed');
+Visit any page on your site with the following query string:
 
-if (!empty($rss)) {
-    foreach ($rss as $item) {
-        echo '<h3><a href="' . esc_url($item['link']) . '">' . esc_html($item['title']) . '</a></h3>';
-        echo '<p>' . esc_html($item['description']) . '</p>';
-    }
-}
-?>
